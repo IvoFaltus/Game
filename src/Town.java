@@ -3,8 +3,12 @@ import java.io.FileReader;
 
 public class Town extends Location implements Exit{
     @Override
-    public void go(Player player) {
-        super.go(player);
+    public void exitToPreviousLocation(Player player) {
+        super.exitToPreviousLocation(player);
+    }
+    @Override
+    public void exit(Player player) {
+        super.exit(player);
     }
 
     @Override

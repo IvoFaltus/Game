@@ -14,7 +14,7 @@ protected String currentLocationName;
 protected String previousLocationName;
 protected String upcomingLocationName;
 
-public void go(Player player){
+public void exit(Player player){
 
     if(this.locationPassed()){
 
@@ -24,6 +24,18 @@ public void go(Player player){
             }
         }
 
+    }else{
+        System.out.println("You cannot leave this location yet");
+    }
+}
+
+public void exitToPreviousLocation(Player player){
+    if(!(previousLocationName.equals("None"))) {
+        for (int i = 0; i < surroundingLocations.size(); i++) {
+            if (surroundingLocations.get(i).getState().equals(State.PREVIOUS)) {
+                player.setCurrentLocation(surroundingLocations.get(i));
+            }
+        }
     }
 }
 

@@ -2,6 +2,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class River extends Location implements Exit{
+    @Override
+    public void exitToPreviousLocation(Player player) {
+        super.exitToPreviousLocation(player);
+    }
     public River(String upcomingLocationName, State state) {
     }
 
@@ -23,8 +27,8 @@ public class River extends Location implements Exit{
     }
 
     @Override
-    public void go(Player player) {
-        super.go(player);
+    public void exit(Player player) {
+        super.exit(player);
     }
 
     @Override

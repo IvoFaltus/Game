@@ -2,12 +2,17 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class Forest extends Location implements Exit{
+    @Override
+    public void exitToPreviousLocation(Player player) {
+        super.exitToPreviousLocation(player);
+    }
+
     public Forest(State state) {
     }
 
     @Override
-    public void go(Player player) {
-        super.go(player);
+    public void exit(Player player) {
+        super.exit(player);
     }
 
     @Override
