@@ -1,11 +1,37 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 public class Town extends Location implements Exit{
+    @Override
+    public void go(Player player) {
+        super.go(player);
+    }
+
     @Override
     public boolean locationPassed() {
         return false;
     }
-
+    public void info() {
+        System.out.println("Current Location: " + currentLocationName + '\n' + "Previous Location: " + previousLocationName + '\n' + "Upcoming Location: " + upcomingLocationName);
+        System.out.println();
+    }
     @Override
     public void createMap() {
+        try {
+
+            BufferedReader br = new BufferedReader(new FileReader("World.txt"));
+            String line = br.readLine();
+            this.currentLocationName = line.substring(0, line.indexOf(","));
+            this.previousLocationName = line.substring(line.indexOf(",") + 1, line.indexOf(";"));
+            this.upcomingLocationName = line.substring(line.indexOf(";") + 1, line.length());
+            this.surroundingLocations.add(new Location(State.PREVIOUS));
+            this.surroundingLocations.add(new Forest(upcomingLocationName,State.UPCOMING));
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public Town(Enum<State> state) {
@@ -13,5 +39,9 @@ public class Town extends Location implements Exit{
     }
 
     public Town() {
+    }
+
+    public Town(String locationName, Enum<State> state) {
+        super(locationName, state);
     }
 }

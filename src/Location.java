@@ -1,9 +1,12 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
 
-public class Location {
-protected String locationName;
+public class Location implements Exit{
+    @Override
+    public boolean locationPassed() {
+        return false;
+    }
+
+    protected String locationName;
     protected ArrayList<Item> items = new ArrayList<>();
 protected ArrayList<Location> surroundingLocations = new ArrayList<>();
 protected Enum<State> state;
@@ -11,19 +14,21 @@ protected String currentLocationName;
 protected String previousLocationName;
 protected String upcomingLocationName;
 
+public void go(Player player){
 
+    if(this.locationPassed()){
+
+        for(int i=0;i<surroundingLocations.size();i++){
+            if(surroundingLocations.get(i).getState().equals(State.UPCOMING)){
+                player.setCurrentLocation(surroundingLocations.get(i));
+            }
+        }
+
+    }
+}
 
 public void fileReading(){
-    try {
-        BufferedReader br = new BufferedReader(new FileReader("World.txt"));
-        currentLocationName = br.readLine().substring(0,br.readLine().indexOf(","));
-        previousLocationName = br.readLine().substring(br.readLine().indexOf(","),br.readLine().indexOf(";"));
-        System.out.println(currentLocationName);
-        System.out.println(previousLocationName);
 
-    }catch (Exception e){
-        System.out.println("error reading World.txt");
-    }
 }
 
 
@@ -54,8 +59,7 @@ public enum State{
 
 
     public void createMap(){
-    surroundingLocations.add(new Location("None", State.PREVIOUS));
-    surroundingLocations.add(new Forest(State.UPCOMING));
+
 
 }
 
