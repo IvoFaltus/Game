@@ -1,4 +1,4 @@
-Town,Forest
-Forest,Town,Field
-Field,Forest,River
-River,Finish
+.Town,None;Forest'
+.Forest,Town;Field'
+.Field,Forest;River'
+.River,Field;Finish'

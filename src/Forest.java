@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Forest extends Location implements Exit{
 
 
@@ -6,5 +8,10 @@ public class Forest extends Location implements Exit{
         return false;
     }
 
+    public Forest(Enum<State> state) {
+        super(state);
+    }
 
+    public Forest() {
+    }
 }

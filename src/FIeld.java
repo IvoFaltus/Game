@@ -3,4 +3,11 @@ public class FIeld extends Location implements Exit{
     public boolean locationPassed() {
         return false;
     }
+
+    public FIeld() {
+    }
+
+    public FIeld(Enum<State> state) {
+        super(state);
+    }
 }

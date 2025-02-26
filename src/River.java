@@ -3,4 +3,11 @@ public class River extends Location implements Exit{
     public boolean locationPassed() {
         return false;
     }
+
+    public River() {
+    }
+
+    public River(Enum<State> state) {
+        super(state);
+    }
 }
