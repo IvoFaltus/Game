@@ -1,2 +1,10 @@
-public class Forest {
+public class Forest extends Location implements Exit{
+
+
+    @Override
+    public boolean locationPassed() {
+        return false;
+    }
+
+
 }
