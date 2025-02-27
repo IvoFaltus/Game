@@ -1,5 +1,10 @@
 public class World {
 
+
+    public void startProgram(){}
+
+
+
     public void worldCreation(){
         System.out.println("vvvvv Player's path vvvvv");
         System.out.println();
@@ -22,4 +27,12 @@ River r = new River();
         l.fileReading();
 
     }
+
+
+
+
+
+
+
+
 }

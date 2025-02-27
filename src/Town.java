@@ -2,6 +2,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class Town extends Location implements Exit{
+
+
+
+
     @Override
     public void exitToPreviousLocation(Player player) {
         super.exitToPreviousLocation(player);
@@ -38,6 +42,7 @@ public class Town extends Location implements Exit{
         }
     }
 
+    //region constructors
     public Town(Enum<State> state) {
         super(state);
     }
@@ -48,4 +53,9 @@ public class Town extends Location implements Exit{
     public Town(String locationName, Enum<State> state) {
         super(locationName, state);
     }
+    //endregion
+
+
+
+
 }

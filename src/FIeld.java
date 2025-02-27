@@ -6,9 +6,7 @@ public class FIeld extends Location implements Exit{
     public void exitToPreviousLocation(Player player) {
         super.exitToPreviousLocation(player);
     }
-    public FIeld() {
 
-    }
 
     @Override
     public void exit(Player player) {
@@ -20,16 +18,7 @@ public class FIeld extends Location implements Exit{
         return false;
     }
 
-    public FIeld(String upcomingLocationName, State upcoming) {
-    }
 
-    public FIeld(Enum<State> state) {
-        super(state);
-    }
-    public void info() {
-        System.out.println("Current Location: " + currentLocationName + '\n' + "Previous Location: " + previousLocationName + '\n' + "Upcoming Location: " + upcomingLocationName);
-        System.out.println();
-    }
     @Override
     public void createMap() {
 
@@ -63,4 +52,21 @@ public class FIeld extends Location implements Exit{
 
 
     }
+
+    //region constructors
+    public FIeld() {
+
+    }
+    public FIeld(String upcomingLocationName, State upcoming) {
+    }
+
+    public FIeld(Enum<State> state) {
+        super(state);
+    }
+    public void info() {
+        System.out.println("Current Location: " + currentLocationName + '\n' + "Previous Location: " + previousLocationName + '\n' + "Upcoming Location: " + upcomingLocationName);
+        System.out.println();
+    }
+    //endregion
+
 }

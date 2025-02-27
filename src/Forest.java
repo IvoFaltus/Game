@@ -7,8 +7,7 @@ public class Forest extends Location implements Exit{
         super.exitToPreviousLocation(player);
     }
 
-    public Forest(State state) {
-    }
+
 
     @Override
     public void exit(Player player) {
@@ -20,12 +19,8 @@ public class Forest extends Location implements Exit{
         return false;
     }
 
-    public Forest(String upcomingLocationName, Enum<State> state) {
-        super(state);
-    }
 
-    public Forest() {
-    }
+
 
 
     public void info() {
@@ -68,4 +63,14 @@ public class Forest extends Location implements Exit{
 
 
     }
+    //region constructors
+    public Forest(State state) {
+    }
+    public Forest() {
+    }
+    public Forest(String upcomingLocationName, Enum<State> state) {
+        super(state);
+    }
+    //endregion
+
 }

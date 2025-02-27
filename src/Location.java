@@ -1,10 +1,7 @@
 import java.util.ArrayList;
 
 public class Location implements Exit{
-    @Override
-    public boolean locationPassed() {
-        return false;
-    }
+
 
     protected String locationName;
     protected ArrayList<Item> items = new ArrayList<>();
@@ -13,7 +10,10 @@ protected Enum<State> state;
 protected String currentLocationName;
 protected String previousLocationName;
 protected String upcomingLocationName;
-
+    @Override
+    public boolean locationPassed() {
+        return false;
+    }
 public void exit(Player player){
 
     if(this.locationPassed()){
@@ -44,30 +44,9 @@ public void fileReading(){
 }
 
 
-
-
-
-
-
 public enum State{
     PREVIOUS, UPCOMING
 }
-//region constructors
-
-    public Location() {
-    }
-
-    public Location(Enum<State> state) {
-    this.state = state;
-}
-
-    public Location(String locationName, Enum<State> state) {
-        this.locationName = locationName;
-        this.state = state;
-    }
-//endregion
-
-
 
 
     public void createMap(){
@@ -75,10 +54,18 @@ public enum State{
 
 }
 
+//region setget & cons
+public Location() {
+}
 
+    public Location(Enum<State> state) {
+        this.state = state;
+    }
 
-
-//region setget
+    public Location(String locationName, Enum<State> state) {
+        this.locationName = locationName;
+        this.state = state;
+    }
 
     public String getLocationName() {
         return locationName;

@@ -2,24 +2,20 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class River extends Location implements Exit{
+
+
+
     @Override
     public void exitToPreviousLocation(Player player) {
         super.exitToPreviousLocation(player);
     }
-    public River(String upcomingLocationName, State state) {
-    }
+
 
     @Override
     public boolean locationPassed() {
         return false;
     }
 
-    public River() {
-    }
-
-    public River(Enum<State> state) {
-        super(state);
-    }
 
     public void info() {
         System.out.println("Current Location: " + currentLocationName + '\n' + "Previous Location: " + previousLocationName + '\n' + "Upcoming Location: " + upcomingLocationName);
@@ -66,6 +62,16 @@ public class River extends Location implements Exit{
 
 
 
+//region constructors
+public River(String upcomingLocationName, State state) {
+}
+public River() {
+}
 
+    public River(Enum<State> state) {
+        super(state);
+    }
+
+    //endregion
 
 }
