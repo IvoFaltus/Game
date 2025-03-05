@@ -1,15 +1,36 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-public class Town extends Location implements Exit{
+public class Town extends Location {
+    boolean var = false;
+
+    @Override
+    public String execute() {
+        createMap();
+        roomGameplay();
+
+
+        return "";
+    }
+
+
+    public void roomGameplay(){
+    while(!locationPassed()){
+    /*
+    gameplay
+     */
+        var = true;
+    }
 
 
 
+}
 
     @Override
     public void exitToPreviousLocation(Player player) {
         super.exitToPreviousLocation(player);
     }
+
     @Override
     public void exit(Player player) {
         super.exit(player);
@@ -17,7 +38,8 @@ public class Town extends Location implements Exit{
 
     @Override
     public boolean locationPassed() {
-        return false;
+
+        return var;
     }
     public void info() {
         System.out.println("Current Location: " + currentLocationName + '\n' + "Previous Location: " + previousLocationName + '\n' + "Upcoming Location: " + upcomingLocationName);

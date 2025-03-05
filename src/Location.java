@@ -1,7 +1,21 @@
 import java.util.ArrayList;
 
-public class Location implements Exit{
+public class Location implements Command {
 
+    @Override
+    public String execute() {
+        return null;
+    }
+
+    @Override
+    public boolean exit() {
+        return false;
+    }
+
+    @Override
+    public void moveOnToOtherLoc() {
+
+    }
 
     protected String locationName;
     protected ArrayList<Item> items = new ArrayList<>();
@@ -100,4 +114,5 @@ public Location() {
     }
 
     //endregion
+
 }

@@ -1,7 +1,26 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-public class River extends Location implements Exit{
+public class River extends Location {
+    boolean var = false;
+
+    @Override
+    public String execute() {
+        createMap();
+        roomGameplay();
+
+
+        return "";
+    }
+
+
+    public void roomGameplay(){
+        while(!locationPassed()){
+    /*
+    gameplay
+     */
+            var = true;
+        }}
 
 
 

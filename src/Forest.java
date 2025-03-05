@@ -1,7 +1,29 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-public class Forest extends Location implements Exit{
+public class Forest extends Location{
+
+    boolean var = false;
+
+    @Override
+    public String execute() {
+        createMap();
+        roomGameplay();
+
+
+        return "";
+    }
+
+
+    public void roomGameplay() {
+        while (!locationPassed()) {
+    /*
+    gameplay
+     */
+            var = true;
+        }
+    }
+
     @Override
     public void exitToPreviousLocation(Player player) {
         super.exitToPreviousLocation(player);

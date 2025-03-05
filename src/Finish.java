@@ -1,4 +1,4 @@
-public class Finish extends Location{
+public class Finish extends Location {
     public Finish() {
     }
 
