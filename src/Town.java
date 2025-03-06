@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Town extends Location {
     int number;
+    String[] options = {"Attack"};
     @Override
     public boolean luck(int probability) {
         return super.luck(probability);
@@ -12,14 +13,13 @@ public class Town extends Location {
 
     Player p = new Player(100);
 
-    public void roomGameplay(){
-        while(!locationPassed()){
-    /*
-    gameplay
-     */
+    public void roomGameplay() {
+        while (!locationPassed()) {
+   fight();
+
+   fight();
             var = true;
         }
-
 
 
     }
@@ -27,32 +27,42 @@ public class Town extends Location {
 
     @Override
     public void fight() {
-        Threat t = new Threat("monster",20,5);
-String[] options = {"Attack"};
+        p.setDamage();
+        Threat t = new Threat("monster", 20, 5);
+        String[] options = {"Attack"};
+        String[] options2 = {"Pick it up and equip", "Put it to inventory", "Leave it"};
+        String choice = "";
+        String choice2 = "";
+        while (t.getHealth() > 0) {
+            System.out.println();
+            System.out.println("Your health " + p.getHealth());
+            System.out.println("Enemy's health " + t.getHealth());
 
-
-        while(t.getHealth()>0){
-
-            System.out.println("Your health "+p.getHealth());
-            System.out.println("Enemy's health "+t.getHealth() );
-
-            String choice = (String) JOptionPane.showInputDialog(null, "choose your move", "Meniu", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-            if(choice.equals("Attack")){
-                t.setHealth(t.getHealth()-p.getDamage());
-                System.out.println("You gave him -"+p.getDamage());
-                p.setHealth(p.getHealth()-t.getDamage());
-                System.out.println("He gave you -"+t.getDamage());
+            choice = (String) JOptionPane.showInputDialog(null, "choose your move", "Menu", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if (choice.equals("Attack")) {
+                t.setHealth(t.getHealth() - p.getDamage());
+                System.out.println("You gave him -" + p.getDamage());
+                if (t.getHealth() > 0) {
+                    p.setHealth(p.getHealth() - t.getDamage());
+                    System.out.println("He gave you -" + t.getDamage());
+                }
+            } else {
+                System.out.println("Enemy's been killed");
             }
 
 
         }
-
-
-
-
-
-
-
+        t.setHealth(20);
+        System.out.println();
+        System.out.println("You found wood log on the ground");
+        System.out.println("Do you want to pick it up and sacrifice your speed or leave it there and still use Fist to fight");
+         choice2 = (String) JOptionPane.showInputDialog(null, "choose your movee", "Menu", JOptionPane.QUESTION_MESSAGE, null, options2, options2[0]);
+if(choice2.equals("Put it to inventory")){
+    p.addToInventory(new Item("wood log"));
+}else if(choice2.equals("Pick it up and equip")){
+    p.addToInventory(new Item("wood log"));
+    p.setEquipedItem(new Item("wood log"));
+}else{}
 
 
 
@@ -70,8 +80,6 @@ String[] options = {"Attack"};
     }
 
 
-
-
     @Override
     public void exitToPreviousLocation(Player player) {
         super.exitToPreviousLocation(player);
@@ -87,10 +95,12 @@ String[] options = {"Attack"};
 
         return var;
     }
+
     public void info() {
         System.out.println("Current Location: " + currentLocationName + '\n' + "Previous Location: " + previousLocationName + '\n' + "Upcoming Location: " + upcomingLocationName);
         System.out.println();
     }
+
     @Override
     public void createMap() {
         try {
@@ -101,11 +111,10 @@ String[] options = {"Attack"};
             this.previousLocationName = line.substring(line.indexOf(",") + 1, line.indexOf(";"));
             this.upcomingLocationName = line.substring(line.indexOf(";") + 1, line.length());
             this.surroundingLocations.add(new Location(State.PREVIOUS));
-            this.surroundingLocations.add(new Forest(upcomingLocationName,State.UPCOMING));
+            this.surroundingLocations.add(new Forest(upcomingLocationName, State.UPCOMING));
 
 
-
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -122,8 +131,6 @@ String[] options = {"Attack"};
         super(locationName, state);
     }
     //endregion
-
-
 
 
 }

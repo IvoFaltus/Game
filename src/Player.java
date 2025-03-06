@@ -7,7 +7,7 @@ public class Player {
     private int health;
     private ArrayList<Item> inventory = new ArrayList<>();
     private Location currentLocation;
-    private Item equipedItem;
+    private Item equipedItem = new Item("Hand");
 private int damage;
     Random rd = new Random();
 
@@ -61,7 +61,7 @@ private int damage;
     }
 
     public void setEquipedItem(Item equipedItem) {
-        this.equipedItem = equipedItem;
+        this.equipedItem = new Item("Hand");
     }
 
     public String getName() {

@@ -6,6 +6,10 @@ public class Item {
 
     //region setget
 
+    public Item(String kind) {
+        this.kind = kind;
+    }
+
     public String getKind() {
         return kind;
     }
