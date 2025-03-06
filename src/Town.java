@@ -1,7 +1,63 @@
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 public class Town extends Location {
+    int number;
+    @Override
+    public boolean luck(int probability) {
+        return super.luck(probability);
+    }
+
+    Player p = new Player(100);
+
+    public void roomGameplay(){
+        while(!locationPassed()){
+    /*
+    gameplay
+     */
+            var = true;
+        }
+
+
+
+    }
+
+
+    @Override
+    public void fight() {
+        Threat t = new Threat("monster",20,5);
+String[] options = {"Attack"};
+
+
+        while(t.getHealth()>0){
+
+            System.out.println("Your health "+p.getHealth());
+            System.out.println("Enemy's health "+t.getHealth() );
+
+            String choice = (String) JOptionPane.showInputDialog(null, "choose your move", "Meniu", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if(choice.equals("Attack")){
+                t.setHealth(t.getHealth()-p.getDamage());
+                System.out.println("You gave him -"+p.getDamage());
+                p.setHealth(p.getHealth()-t.getDamage());
+                System.out.println("He gave you -"+t.getDamage());
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+    }
+
     boolean var = false;
 
     @Override
@@ -14,17 +70,7 @@ public class Town extends Location {
     }
 
 
-    public void roomGameplay(){
-    while(!locationPassed()){
-    /*
-    gameplay
-     */
-        var = true;
-    }
 
-
-
-}
 
     @Override
     public void exitToPreviousLocation(Player player) {

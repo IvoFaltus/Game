@@ -4,4 +4,6 @@ public interface Command {
     boolean exit();
     void moveOnToOtherLoc();
     boolean locationPassed();
+    boolean luck(int probability);
+    void fight();
 }

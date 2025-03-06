@@ -7,6 +7,16 @@ public class World implements Command{
     public void startProgram(){}
 
     @Override
+    public void fight() {
+
+    }
+
+    @Override
+    public boolean luck(int probability) {
+        return false;
+    }
+
+    @Override
     public void moveOnToOtherLoc() {
 
     }

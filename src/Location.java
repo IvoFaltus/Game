@@ -1,6 +1,25 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Location implements Command {
+
+
+    @Override
+    public void fight() {
+
+    }
+
+    @Override
+    public boolean luck(int probability) {
+        boolean temp = false;
+        Random rd = new Random();
+
+         if(rd.nextInt(0,100)<=probability){
+             temp = true;
+         }
+
+         return temp;
+    }
 
     @Override
     public String execute() {
@@ -28,6 +47,8 @@ protected String upcomingLocationName;
     public boolean locationPassed() {
         return false;
     }
+
+
 public void exit(Player player){
 
     if(this.locationPassed()){
@@ -59,7 +80,7 @@ public void fileReading(){
 
 
 public enum State{
-    PREVIOUS, UPCOMING
+    PREVIOUS, UPCOMING, CURRENT
 }
 
 

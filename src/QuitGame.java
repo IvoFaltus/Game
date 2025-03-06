@@ -18,4 +18,14 @@ public class QuitGame implements Command{
     public boolean locationPassed() {
         return false;
     }
+
+    @Override
+    public void fight() {
+
+    }
+
+    @Override
+    public boolean luck(int probability) {
+        return false;
+    }
 }
