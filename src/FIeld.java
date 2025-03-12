@@ -5,7 +5,7 @@ public class FIeld extends Location {
     boolean var = false;
 
     @Override
-    public String execute() {
+    public String execute(Player p) {
         createMap();
         roomGameplay();
 

@@ -7,7 +7,7 @@ public class World implements Command{
     public void startProgram(){}
 
     @Override
-    public void fight() {
+    public void fight(Player p) {
 
     }
 
@@ -22,20 +22,56 @@ public class World implements Command{
     }
 
     @Override
-    public String execute() {
+    public String execute(Player p) {
+        Finish fi = new Finish();
+        p.setCurrentLocation(new Location("Town", Location.State.CURRENT));
+        Town t = new Town();FIeld f = new FIeld(); River r = new River();
+Forest fr = new Forest();
+        p.addToInventory(new Item("Empty slot"),0);
+        p.addToInventory(new Item("Empty slot"),0);
+        p.addToInventory(new Item("Empty slot"),0);
+        p.addToInventory(new Item("Empty slot"),0);
+        p.addToInventory(new Item("Empty slot"),0);
+        p.addToInventory(new Item("Empty slot"),0);
+        p.addToInventory(new Item("Empty slot"),0);
+
+
+
+switch (p.getCurrentLocation().getLocationName()){
+    case"Town":
+        t.execute(p);
+        break;
+    case"Forest":
+        fr.execute(p);
+        break;
+    case"Field":
+        f.execute(p);
+
+
+        break;
+    case "River":
+        r.execute(p);
+        break;
+    case"finish":
+        fi.execute(p);
+        break;
+
+
+}
+
 
 
         QuitGame quitGame = new QuitGame();
         System.out.println("vvvvv Player's path vvvvv");
         System.out.println();
-        Town t = new Town();
-        Forest fr = new Forest();
-        FIeld f = new FIeld();
-        River r = new River();
-        t.execute();
-        fr.execute();
-        f.execute();
-        r.execute();
+
+
+
+
+        t.execute(p);
+        fr.execute(p);
+        f.execute(p);
+        r.execute(p);
 
 
 

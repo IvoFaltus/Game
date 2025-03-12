@@ -3,9 +3,12 @@ import java.util.Random;
 
 public class Location implements Command {
 
+public void ItemFound(Player p){
 
+
+}
     @Override
-    public void fight() {
+    public void fight(Player p) {
 
     }
 
@@ -22,7 +25,7 @@ public class Location implements Command {
     }
 
     @Override
-    public String execute() {
+    public String execute(Player p) {
         return null;
     }
 

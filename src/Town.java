@@ -1,38 +1,66 @@
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+
 public class Town extends Location {
     int number;
     String[] options = {"Attack"};
+
     @Override
     public boolean luck(int probability) {
         return super.luck(probability);
     }
 
-    Player p = new Player(100);
 
-    public void roomGameplay() {
-        while (!locationPassed()) {
-   fight();
-
-   fight();
-            var = true;
+    @Override
+    public void ItemFound(Player p) {
+        String item = "wood log";
+        String choice2 = "";
+        String[] options2 = {"Pick it up and equip", "Put it to inventory", "Leave it"};
+        System.out.println();
+        System.out.println("You found " + item + " on the ground");
+        System.out.println("Do you want to pick it up and sacrifice your speed capability or leave it there and still use Fist to fight");
+        choice2 = (String) JOptionPane.showInputDialog(null, "choose your movee", "Menu", JOptionPane.QUESTION_MESSAGE, null, options2, options2[0]);
+        if (choice2.equals("Put it to inventory")) {
+            System.out.println("Item added to inventory");
+            p.addToInventory(new Item("wood log"),1);
+        } else if (choice2.equals("Pick it up and equip")) {
+            p.addToInventory(new Item("wood log"),1);
+            p.setEquipedItem(new Item("wood log"));
+        } else {
         }
 
 
     }
 
+    public void roomGameplay(Player p) {
+        while (!locationPassed()) {
+            fight(p);
+            ItemFound(p);
+            fight(p);
+            var = true;
+        }
+        System.out.println("locations you can go to ");
+
+    }
+
 
     @Override
-    public void fight() {
+    public void fight(Player p) {
+
+        String[] options3 = {p.getInventory().get(0).getKind(), p.getInventory().get(1).getKind(), p.getInventory().get(2).getKind(), p.getInventory().get(3).getKind(),
+                p.getInventory().get(4).getKind(), p.getInventory().get(5).getKind(), p.getInventory().get(6).getKind()};
+
+
         p.setDamage();
         Threat t = new Threat("monster", 20, 5);
-        String[] options = {"Attack"};
-        String[] options2 = {"Pick it up and equip", "Put it to inventory", "Leave it"};
+        String[] options = {"Attack", "Open inventory"};
+
         String choice = "";
-        String choice2 = "";
+
         while (t.getHealth() > 0) {
             System.out.println();
             System.out.println("Your health " + p.getHealth());
@@ -46,24 +74,36 @@ public class Town extends Location {
                     p.setHealth(p.getHealth() - t.getDamage());
                     System.out.println("He gave you -" + t.getDamage());
                 }
-            } else {
-                System.out.println("Enemy's been killed");
+            } else if (choice.equals("Open inventory")) {
+                String KindOfItem = (String) JOptionPane.showInputDialog(null, "choose item you wanna equip", "Inventory",
+                        JOptionPane.QUESTION_MESSAGE, null, options3, options3[0]);
+
+                switch (KindOfItem) {
+                    case "Empty Slot":
+                        System.out.println("you haven't picked up anything");
+                        break;
+                    case "wood log":
+                        p.equipItem("wood log");
+                        break;
+                    case "hammer":
+                        p.equipItem("hammer");
+                        break;
+                    case "pistol":
+                        p.equipItem("pistol");
+                        break;
+                    case "rifle":
+                        p.equipItem("rifle");
+                        break;
+                    default:
+
+                        break;
+                }
+
             }
 
 
         }
         t.setHealth(20);
-        System.out.println();
-        System.out.println("You found wood log on the ground");
-        System.out.println("Do you want to pick it up and sacrifice your speed or leave it there and still use Fist to fight");
-         choice2 = (String) JOptionPane.showInputDialog(null, "choose your movee", "Menu", JOptionPane.QUESTION_MESSAGE, null, options2, options2[0]);
-if(choice2.equals("Put it to inventory")){
-    p.addToInventory(new Item("wood log"));
-}else if(choice2.equals("Pick it up and equip")){
-    p.addToInventory(new Item("wood log"));
-    p.setEquipedItem(new Item("wood log"));
-}else{}
-
 
 
     }
@@ -71,9 +111,10 @@ if(choice2.equals("Put it to inventory")){
     boolean var = false;
 
     @Override
-    public String execute() {
+    public String execute(Player p) {
+
         createMap();
-        roomGameplay();
+        roomGameplay(p);
 
 
         return "";

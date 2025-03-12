@@ -5,7 +5,7 @@ public class River extends Location {
     boolean var = false;
 
     @Override
-    public String execute() {
+    public String execute(Player p) {
         createMap();
         roomGameplay();
 

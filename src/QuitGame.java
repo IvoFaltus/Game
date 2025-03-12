@@ -1,6 +1,6 @@
 public class QuitGame implements Command{
     @Override
-    public String execute() {
+    public String execute(Player p) {
         return "Game is over";
     }
 
@@ -20,7 +20,7 @@ public class QuitGame implements Command{
     }
 
     @Override
-    public void fight() {
+    public void fight(Player p) {
 
     }
 

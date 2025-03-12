@@ -1,9 +1,9 @@
 public interface Command {
 
-      String execute();
+      String execute(Player p);
     boolean exit();
     void moveOnToOtherLoc();
     boolean locationPassed();
     boolean luck(int probability);
-    void fight();
+    void fight(Player p);
 }

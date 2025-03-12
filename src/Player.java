@@ -6,6 +6,7 @@ public class Player {
     private String name;
     private int health;
     private ArrayList<Item> inventory = new ArrayList<>();
+
     private Location currentLocation;
     private Item equipedItem = new Item("Hand");
 private int damage;
@@ -13,9 +14,9 @@ private int damage;
 
 
 
-    public void addToInventory(Item i){
+    public void addToInventory(Item i, int index){
 
-        inventory.add(i);
+        inventory.add(index, i);
     }
 
 
