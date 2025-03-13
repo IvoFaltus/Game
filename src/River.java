@@ -41,10 +41,7 @@ public class River extends Location {
         System.out.println();
     }
 
-    @Override
-    public void exit(Player player) {
-        super.exit(player);
-    }
+
 
     @Override
     public void createMap() {

@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -30,8 +31,39 @@ public void ItemFound(Player p){
     }
 
     @Override
-    public boolean exit() {
-        return false;
+    public void exit(Player p, Location l) {
+
+       String[] options = {surroundingLocations.get(1).getLocationName()};
+
+
+        int choice =0;
+        choice = JOptionPane.showOptionDialog(null,"What location do you want to proceed to","equipped item: "+p.getEquipedItem().getKind(),JOptionPane.DEFAULT_OPTION,
+               JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+
+        switch (choice){
+            case 0:
+                if(this.locationPassed()){
+
+
+p.setCurrentLocation(l.surroundingLocations.get(0));
+                    System.out.println("You entered new location: "+l.surroundingLocations.get(0).getLocationName());
+
+
+
+                }else{
+                    System.out.println("You cannot leave this location yet");
+                }
+
+                break;
+
+
+        }
+
+
+
+
+
+
     }
 
     @Override
@@ -52,20 +84,6 @@ protected String upcomingLocationName;
     }
 
 
-public void exit(Player player){
-
-    if(this.locationPassed()){
-
-        for(int i=0;i<surroundingLocations.size();i++){
-            if(surroundingLocations.get(i).getState().equals(State.UPCOMING)){
-                player.setCurrentLocation(surroundingLocations.get(i));
-            }
-        }
-
-    }else{
-        System.out.println("You cannot leave this location yet");
-    }
-}
 
 public void exitToPreviousLocation(Player player){
     if(!(previousLocationName.equals("None"))) {
@@ -93,7 +111,32 @@ public enum State{
 }
 
 //region setget & cons
-public Location() {
+
+    public void setUpcomingLocationName(String upcomingLocationName) {
+        this.upcomingLocationName = upcomingLocationName;
+    }
+
+    public void setPreviousLocationName(String previousLocationName) {
+        this.previousLocationName = previousLocationName;
+    }
+
+    public void setCurrentLocationName(String currentLocationName) {
+        this.currentLocationName = currentLocationName;
+    }
+
+    public String getCurrentLocationName() {
+        return currentLocationName;
+    }
+
+    public String getPreviousLocationName() {
+        return previousLocationName;
+    }
+
+    public String getUpcomingLocationName() {
+        return upcomingLocationName;
+    }
+
+    public Location() {
 }
 
     public Location(Enum<State> state) {

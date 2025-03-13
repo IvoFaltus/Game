@@ -1,39 +1,42 @@
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-public class Forest extends Location{
+public class Forest extends Location {
 
     boolean var = false;
 
     @Override
     public String execute(Player p) {
         createMap();
-        roomGameplay();
+        roomGameplay(p);
 
 
         return "";
     }
 
+    @Override
+    public boolean luck(int probability) {
+        return super.luck(probability);
+    }
 
-    public void roomGameplay() {
+    public void roomGameplay(Player p) {
         while (!locationPassed()) {
-    /*
-    gameplay
-     */
+    if(luck(50)){
+        ItemFound(p);
+    }
+    fight(p);
+    ItemFound(p);
+    fight(p);
             var = true;
         }
     }
 
-    @Override
-    public void exitToPreviousLocation(Player player) {
-        super.exitToPreviousLocation(player);
-    }
-
-
 
     @Override
-    public void exit(Player player) {
-        super.exit(player);
+    public void fight(Player p) {
+
+
     }
 
     @Override

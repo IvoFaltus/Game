@@ -27,10 +27,7 @@ public class FIeld extends Location {
     }
 
 
-    @Override
-    public void exit(Player player) {
-        super.exit(player);
-    }
+
 
     @Override
     public boolean locationPassed() {

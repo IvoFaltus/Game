@@ -4,6 +4,11 @@ public class World implements Command{
         return false;
     }
 
+    @Override
+    public void exit(Player p, Location l) {
+
+    }
+
     public void startProgram(){}
 
     @Override
@@ -23,8 +28,10 @@ public class World implements Command{
 
     @Override
     public String execute(Player p) {
+
         Finish fi = new Finish();
         p.setCurrentLocation(new Location("Town", Location.State.CURRENT));
+        System.out.println("player stars here"+p.getCurrentLocation().getLocationName());
         Town t = new Town();FIeld f = new FIeld(); River r = new River();
 Forest fr = new Forest();
         p.addToInventory(new Item("Empty slot"),0);
@@ -36,33 +43,33 @@ Forest fr = new Forest();
         p.addToInventory(new Item("Empty slot"),0);
 
 
-
-switch (p.getCurrentLocation().getLocationName()){
-    case"Town":
-        t.execute(p);
-        break;
-    case"Forest":
-        fr.execute(p);
-        break;
-    case"Field":
-        f.execute(p);
-
-
-        break;
-    case "River":
-        r.execute(p);
-        break;
-    case"finish":
-        fi.execute(p);
-        break;
+while(fi.isEnd()) {
+    switch (p.getCurrentLocation().getLocationName()) {
+        case "Town":
+            t.execute(p);
+            break;
+        case "Forest":
+            fr.execute(p);
+            break;
+        case "Field":
+            f.execute(p);
 
 
+            break;
+        case "River":
+            r.execute(p);
+            break;
+        case "finish":
+            fi.execute(p);
+            break;
+
+
+    }
 }
 
 
-
         QuitGame quitGame = new QuitGame();
-        System.out.println("vvvvv Player's path vvvvv");
+
         System.out.println();
 
 
@@ -79,25 +86,12 @@ switch (p.getCurrentLocation().getLocationName()){
         l.fileReading();
 
 
-        if(quitGame.exit()){
-            System.exit(0);
-        }
 
 
 
 
 
         return null;
-    }
-
-    @Override
-    public boolean exit() {
-
-
-
-
-
-        return false;
     }
 
 

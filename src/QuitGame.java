@@ -5,8 +5,8 @@ public class QuitGame implements Command{
     }
 
     @Override
-    public boolean exit() {
-        return true;
+    public void exit(Player p, Location l) {
+
     }
 
     @Override

@@ -6,7 +6,7 @@ public class Main {
         w.execute(p);
 
 
-        Town t = new Town();
+
 
 
 

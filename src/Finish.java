@@ -9,4 +9,10 @@ public class Finish extends Location {
     public Finish(String locationName, Enum<State> state) {
         super(locationName, state);
     }
+
+    private boolean end = false;
+
+    public boolean isEnd() {
+        return end;
+    }
 }

@@ -1,7 +1,7 @@
 public interface Command {
 
       String execute(Player p);
-    boolean exit();
+    void exit(Player p,Location l);
     void moveOnToOtherLoc();
     boolean locationPassed();
     boolean luck(int probability);
