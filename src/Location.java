@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class Location implements Command {
 
-public void ItemFound(Player p){
+public boolean ItemFound(Player p){
 
-
+return false;
 }
     @Override
     public void fight(Player p) {
@@ -33,7 +33,7 @@ public void ItemFound(Player p){
     @Override
     public void exit(Player p, Location l) {
 
-       String[] options = {surroundingLocations.get(1).getLocationName()};
+       String[] options = {surroundingLocations.get(0).getLocationName(),surroundingLocations.get(1).getLocationName()};
 
 
         int choice =0;
@@ -42,20 +42,23 @@ public void ItemFound(Player p){
 
         switch (choice){
             case 0:
-                if(this.locationPassed()){
+                if(this.locationPassed()&&!(surroundingLocations.get(0).getLocationName().equals("There is no previous location"))){
 
 
 p.setCurrentLocation(l.surroundingLocations.get(0));
-                    System.out.println("You entered new location: "+l.surroundingLocations.get(0).getLocationName());
+                    System.out.println("You entered location: "+l.surroundingLocations.get(0).getLocationName());
 
 
 
                 }else{
-                    System.out.println("You cannot leave this location yet");
+                    System.out.println("There is no previous location, youre going to Forest!");
                 }
 
                 break;
+            case 1:
+                p.setCurrentLocation(l.surroundingLocations.get(1));
 
+                break;
 
         }
 

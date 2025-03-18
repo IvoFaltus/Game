@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,7 +13,37 @@ public class Player {
 private int damage;
     Random rd = new Random();
 
+    public void openInventory(Player p){
+        String[] options3 = {p.getInventory().get(0).getKind(), p.getInventory().get(1).getKind(), p.getInventory().get(2).getKind(), p.getInventory().get(3).getKind(),
+                p.getInventory().get(4).getKind(), p.getInventory().get(5).getKind(), p.getInventory().get(6).getKind()};
+        String KindOfItem = (String) JOptionPane.showInputDialog(null, "choose item you wanna equip", "Inventory",
+                JOptionPane.QUESTION_MESSAGE, null, options3, options3[0]);
 
+        switch (KindOfItem) {
+            case "Empty Slot":
+                System.out.println("you haven't picked up anything");
+                break;
+            case "wood log":
+                p.equipItem("wood log");
+                break;
+            case "hammer":
+                p.equipItem("hammer");
+                break;
+            case "pistol":
+                p.equipItem("pistol");
+                break;
+            case "rifle":
+                p.equipItem("rifle");
+                break;
+            case null:
+                System.out.println("You haven't equipped anything");
+                break;
+            default:
+
+                break;
+        }
+
+    }
 
     public void addToInventory(Item i, int index){
 

@@ -7,6 +7,41 @@ public class Forest extends Location {
     boolean var = false;
 
     @Override
+    public boolean ItemFound(Player p) {
+        boolean temp = false;
+        String item = "hammer";
+        int choice2 = 0;
+        String[] options2 = { "Put it to inventory", "Leave it"};
+        System.out.println();
+        System.out.println("You found " + item + " on the ground");
+        System.out.println("Do you want to pick it up and sacrifice your speed capability or leave it there and still use Fist to fight");
+
+
+
+
+
+        choice2 = JOptionPane.showOptionDialog(null,"You found " + item + " on the ground. Do you want to pick it up and sacrifice your speed capability or leave it there and still use Fist to fight","equipped item- "+p.getEquipedItem().getKind(),JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,null,options2,options2);
+
+
+
+        p.setDamage();
+
+
+
+
+
+
+        if (choice2==0) {
+            p.addToInventory(new Item("hammer"),3);
+temp = true;
+        } else {
+        }
+
+return temp;
+    }
+
+    @Override
     public String execute(Player p) {
         createMap();
         roomGameplay(p);
@@ -21,6 +56,8 @@ public class Forest extends Location {
     }
 
     public void roomGameplay(Player p) {
+        String[] ok = {"Ok"};
+        int inform = JOptionPane.showOptionDialog(null, "You find yourself in a town, beat a monsters and get to move on to another location", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,ok,ok);
         while (!locationPassed()) {
     if(luck(50)){
         ItemFound(p);
@@ -28,8 +65,18 @@ public class Forest extends Location {
     fight(p);
     ItemFound(p);
     fight(p);
+    if(luck(70)){
+        System.out.println("You had been lucky, your health has been cured");
+        p.setHealth(100);
+    }
+    if(ItemFound(p)){
+        fight(p);
+    }
+
             var = true;
         }
+        System.out.println("locations you can go to ");
+        exit(p,this);
     }
 
 
@@ -37,11 +84,48 @@ public class Forest extends Location {
     public void fight(Player p) {
 
 
+
+
+        p.setDamage();
+        Threat t = new Threat("monster", 50, 10);
+        String[] options = {"Attack", "Open inventory"};
+
+        String choice = "";
+
+        while (t.getHealth() > 0) {
+            System.out.println();
+            System.out.println("Your health " + p.getHealth());
+            System.out.println("Enemy's health " + t.getHealth());
+
+            choice = (String) JOptionPane.showInputDialog(null, "choose your move", "equipped item- "+p.getEquipedItem().getKind(), JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if (choice.equals("Attack")) {
+                t.setHealth(t.getHealth() - p.getDamage());
+                System.out.println("You gave him -" + p.getDamage());
+                if (t.getHealth() > 0) {
+                    p.setHealth(p.getHealth() - t.getDamage());
+                    System.out.println("He gave you -" + t.getDamage());
+                }else if(t.getHealth()<0){
+                    System.out.println("enemy has been killed");
+                } else if (p.getHealth()<=0) {
+                    System.out.println("You lost");
+                    System.exit(32);
+
+                }
+            } else if (choice.equals("Open inventory")) {
+                p.openInventory(p);
+            }
+
+
+        }
+        t.setHealth(20);
+
+
+
     }
 
     @Override
     public boolean locationPassed() {
-        return false;
+        return var;
     }
 
 
@@ -51,6 +135,11 @@ public class Forest extends Location {
     public void info() {
         System.out.println("Current Location: " + currentLocationName + '\n' + "Previous Location: " + previousLocationName + '\n' + "Upcoming Location: " + upcomingLocationName);
         System.out.println();
+    }
+
+    @Override
+    public void exit(Player p, Location l) {
+        super.exit(p, this);
     }
 
     @Override
@@ -77,8 +166,8 @@ public class Forest extends Location {
                 this.currentLocationName = line.substring(0, line.indexOf(","));
                 this.previousLocationName = line.substring(line.indexOf(",") + 1, line.indexOf(";"));
                 this.upcomingLocationName = line.substring(line.indexOf(";") + 1, line.length());
-                this.surroundingLocations.add(new Town(State.PREVIOUS));
-                this.surroundingLocations.add(new FIeld(upcomingLocationName, State.UPCOMING));
+                this.surroundingLocations.add(new Location("Town",State.PREVIOUS));
+                this.surroundingLocations.add(new Location("Field",State.UPCOMING));
 
 
             } catch (Exception e) {

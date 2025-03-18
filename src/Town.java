@@ -18,43 +18,14 @@ public class Town extends Location {
 
 
 
-    public void openInventory(Player p){
-        String[] options3 = {p.getInventory().get(0).getKind(), p.getInventory().get(1).getKind(), p.getInventory().get(2).getKind(), p.getInventory().get(3).getKind(),
-                p.getInventory().get(4).getKind(), p.getInventory().get(5).getKind(), p.getInventory().get(6).getKind()};
-        String KindOfItem = (String) JOptionPane.showInputDialog(null, "choose item you wanna equip", "Inventory",
-                JOptionPane.QUESTION_MESSAGE, null, options3, options3[0]);
 
-        switch (KindOfItem) {
-            case "Empty Slot":
-                System.out.println("you haven't picked up anything");
-                break;
-            case "wood log":
-                p.equipItem("wood log");
-                break;
-            case "hammer":
-                p.equipItem("hammer");
-                break;
-            case "pistol":
-                p.equipItem("pistol");
-                break;
-            case "rifle":
-                p.equipItem("rifle");
-                break;
-            case null:
-                System.out.println("You haven't equipped anything");
-                break;
-            default:
-
-                break;
-        }
-
-    }
 
 
 
 
     @Override
-    public void ItemFound(Player p) {
+    public boolean ItemFound(Player p) {
+        boolean temp = false;
         String item = "wood log";
         int choice2 = 0;
         String[] options2 = { "Put it to inventory", "Leave it"};
@@ -80,14 +51,16 @@ public class Town extends Location {
 
         if (choice2==0) {
             p.addToInventory(new Item("wood log"),1);
-
+ temp = true;
         } else {
         }
 
-
+return temp;
     }
 
     public void roomGameplay(Player p) {
+        String[] ok = {"Ok"};
+        int inform = JOptionPane.showOptionDialog(null, "You find yourself in a town, beat a monsters and get to move on to another location", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,ok,ok);
         setUpcomingLocationName("Forest");
         setPreviousLocationName("None");
         while (!locationPassed()) {
@@ -97,7 +70,7 @@ public class Town extends Location {
             var = true;
         }
         System.out.println("locations you can go to ");
-exit(p,this);
+        exit(p,this);
     }
 
 
@@ -129,7 +102,7 @@ exit(p,this);
                     System.out.println("enemy has been killed");
                 }
             } else if (choice.equals("Open inventory")) {
-               openInventory(p);
+               p.openInventory(p);
             }
 
 
