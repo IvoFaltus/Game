@@ -111,32 +111,13 @@ public class River extends Location {
 
 
     public void roomGameplay(Player p){
+        String[] options = {"Build a boat","Swim through"};
         String[] ok = {"Ok"};
         int inform = JOptionPane.showOptionDialog(null, "You find yourself in front of a river, In case you've collected enough of wood, you're able to build a boat. Otherwise you have to swim through" +
                 "d get to move on to another location", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,ok,ok);
-        while(!locationPassed()){
-            fight(p);
-            if(luck(50)){
-                ItemFound(p,0);
-            }
-            if(luck(90)){
-                System.out.println("You had been lucky lucky, you health has been cured");
-                p.setHealth(100);
-            }
-            fight(p);
-            if(luck(90)){
-                System.out.println("You had been lucky lucky, you health has been cured");
-                p.setHealth(100);
-            }
-            fight(p);
-            if(luck(90)){
-                System.out.println("You had been lucky lucky, you health has been cured");
-                p.setHealth(100);
-            }
-            ItemFound(p,1);
-
+        String choice = (String) JOptionPane.showInputDialog(null, "choose your move", "equipped item- "+p.getEquipedItem().getKind(), JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
             var = true;
-        }
+
         System.out.println("locations you can go to ");
         exit(p,this);
     }
