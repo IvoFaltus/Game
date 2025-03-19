@@ -7,18 +7,26 @@ public class FIeld extends Location {
     @Override
     public String execute(Player p) {
         createMap();
-        roomGameplay();
+        roomGameplay(p);
 
 
         return "";
     }
 
 
-    public void roomGameplay(){
+    public void roomGameplay(Player p){
         while(!locationPassed()){
-    /*
-    gameplay
-     */
+    fight(p);
+    if(luck(50)){
+        ItemFound(p,0);
+    }
+    fight(p);
+    if(luck(50)){
+        System.out.println("You had been lucky lucky, you health has been cured");
+        p.setHealth(100);
+    }
+    fight(p);
+
             var = true;
         }}
     @Override
@@ -58,8 +66,8 @@ public class FIeld extends Location {
             this.currentLocationName = line.substring(0, line.indexOf(","));
             this.previousLocationName = line.substring(line.indexOf(",") + 1, line.indexOf(";"));
             this.upcomingLocationName = line.substring(line.indexOf(";") + 1, line.length());
-            this.surroundingLocations.add(new Forest(State.PREVIOUS));
-            this.surroundingLocations.add(new River(upcomingLocationName, State.UPCOMING));
+            this.surroundingLocations.add(new Location("Forest",State.PREVIOUS));
+            this.surroundingLocations.add(new Location("River", State.UPCOMING));
 
 
         } catch (Exception e) {

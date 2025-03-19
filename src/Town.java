@@ -24,7 +24,7 @@ public class Town extends Location {
 
 
     @Override
-    public boolean ItemFound(Player p) {
+    public boolean ItemFound(Player p, int number) {
         boolean temp = false;
         String item = "wood log";
         int choice2 = 0;
@@ -65,7 +65,7 @@ return temp;
         setPreviousLocationName("None");
         while (!locationPassed()) {
             fight(p);
-            ItemFound(p);
+            ItemFound(p,0);
             fight(p);
             var = true;
         }

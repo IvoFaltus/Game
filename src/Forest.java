@@ -7,7 +7,7 @@ public class Forest extends Location {
     boolean var = false;
 
     @Override
-    public boolean ItemFound(Player p) {
+    public boolean ItemFound(Player p, int number) {
         boolean temp = false;
         String item = "hammer";
         int choice2 = 0;
@@ -60,16 +60,16 @@ return temp;
         int inform = JOptionPane.showOptionDialog(null, "You find yourself in a town, beat a monsters and get to move on to another location", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,ok,ok);
         while (!locationPassed()) {
     if(luck(50)){
-        ItemFound(p);
+        ItemFound(p,0);
     }
     fight(p);
-    ItemFound(p);
+    ItemFound(p,0);
     fight(p);
     if(luck(70)){
         System.out.println("You had been lucky, your health has been cured");
         p.setHealth(100);
     }
-    if(ItemFound(p)){
+    if(ItemFound(p,0)){
         fight(p);
     }
 

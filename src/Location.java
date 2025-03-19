@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Location implements Command {
 
-public boolean ItemFound(Player p){
+public boolean ItemFound(Player p, int number){
 
 return false;
 }
