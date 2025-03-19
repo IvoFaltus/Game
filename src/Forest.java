@@ -8,8 +8,13 @@ public class Forest extends Location {
 
     @Override
     public boolean ItemFound(Player p, int number) {
+        String item = "";
         boolean temp = false;
-        String item = "hammer";
+        if(number==0) {
+             item = "hammer";
+        }else if(number==1){
+             item = "wood log";
+        }
         int choice2 = 0;
         String[] options2 = { "Put it to inventory", "Leave it"};
         System.out.println();
@@ -33,7 +38,19 @@ public class Forest extends Location {
 
 
         if (choice2==0) {
-            p.addToInventory(new Item("hammer"),3);
+
+
+            for(int i =0;i<p.getInventory().size();i++){
+                if(!(p.getInventory().get(i).getKind().equals("empty slot"))){
+                    p.addToInventory(new Item(item),i);
+                    break;
+                }
+
+            }
+
+
+
+
 temp = true;
         } else {
         }
@@ -57,19 +74,20 @@ return temp;
 
     public void roomGameplay(Player p) {
         String[] ok = {"Ok"};
-        int inform = JOptionPane.showOptionDialog(null, "You find yourself in a town, beat a monsters and get to move on to another location", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,ok,ok);
+        int inform = JOptionPane.showOptionDialog(null, "You find yourself in a Forest, beat a stronger monsters than previously an" +
+                "d get to move on to another location", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,ok,ok);
         while (!locationPassed()) {
     if(luck(50)){
         ItemFound(p,0);
     }
     fight(p);
-    ItemFound(p,0);
+    ItemFound(p,1);
     fight(p);
     if(luck(70)){
         System.out.println("You had been lucky, your health has been cured");
         p.setHealth(100);
     }
-    if(ItemFound(p,0)){
+    if(ItemFound(p,1)){
         fight(p);
     }
 
@@ -102,14 +120,15 @@ return temp;
                 t.setHealth(t.getHealth() - p.getDamage());
                 System.out.println("You gave him -" + p.getDamage());
                 if (t.getHealth() > 0) {
+                    if (p.getHealth()<=0) {
+                        System.out.println("You lost");
+                        System.exit(32);
+
+                    }
                     p.setHealth(p.getHealth() - t.getDamage());
                     System.out.println("He gave you -" + t.getDamage());
                 }else if(t.getHealth()<0){
                     System.out.println("enemy has been killed");
-                } else if (p.getHealth()<=0) {
-                    System.out.println("You lost");
-                    System.exit(32);
-
                 }
             } else if (choice.equals("Open inventory")) {
                 p.openInventory(p);

@@ -11,6 +11,9 @@ return false;
     @Override
     public void fight(Player p) {
 
+
+
+
     }
 
     @Override
@@ -52,11 +55,12 @@ p.setCurrentLocation(l.surroundingLocations.get(0));
 
                 }else{
                     System.out.println("There is no previous location, youre going to Forest!");
+                    p.setCurrentLocation(l.surroundingLocations.get(1));
                 }
 
                 break;
             case 1:
-                p.setCurrentLocation(l.surroundingLocations.get(1));
+
 
                 break;
 
