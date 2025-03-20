@@ -42,11 +42,11 @@ return false;
         int choice =0;
         choice = JOptionPane.showOptionDialog(null,"What location do you want to proceed to","equipped item: "+p.getEquipedItem().getKind(),JOptionPane.DEFAULT_OPTION,
                JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
-
+        System.out.println("choice is "+choice);
         switch (choice){
             case 0:
-                if(this.locationPassed()&&!(surroundingLocations.get(0).getLocationName().equals("There is no previous location"))){
-
+                if(!(surroundingLocations.get(0).getLocationName().equals("There is no previous location"))){
+                    System.out.println("choice is "+l.surroundingLocations.get(0).getLocationName());
 
 p.setCurrentLocation(l.surroundingLocations.get(0));
                     System.out.println("You entered location: "+l.surroundingLocations.get(0).getLocationName());
@@ -60,8 +60,9 @@ p.setCurrentLocation(l.surroundingLocations.get(0));
 
                 break;
             case 1:
-
-
+                System.out.println("tohle");
+                System.out.println(p.getCurrentLocation().getLocationName());
+                p.setCurrentLocation(l.surroundingLocations.get(1));
                 break;
 
         }

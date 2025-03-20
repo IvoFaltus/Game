@@ -50,7 +50,7 @@ public class Town extends Location {
 
 
         if (choice2==0) {
-            p.addToInventory(new Item("wood log"),1);
+            p.addToInventory(new Item("wood log"),0);
  temp = true;
         } else {
         }

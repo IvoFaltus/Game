@@ -11,9 +11,9 @@ public class Forest extends Location {
         String item = "";
         boolean temp = false;
         if(number==0) {
-             item = "hammer";
-        }else if(number==1){
              item = "wood log";
+        }else if(number==1){
+             item = "hammer";
         }
         int choice2 = 0;
         String[] options2 = { "Put it to inventory", "Leave it"};
@@ -87,7 +87,7 @@ return temp;
         System.out.println("You had been lucky, your health has been cured");
         p.setHealth(100);
     }
-    if(ItemFound(p,1)){
+    if(ItemFound(p,0)){
         fight(p);
     }
 
