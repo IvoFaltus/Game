@@ -117,9 +117,14 @@ public class River extends Location {
                 "d get to move on to another location", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,ok,ok);
         String choice = (String) JOptionPane.showInputDialog(null, "choose your move", "equipped item- "+p.getEquipedItem().getKind(), JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
             var = true;
+if(choice.equals("Build a boat")){
+    exit(p,this);
+}else if(choice.equals("Swim through")){
+    fight(p);
+    exit(p,this);
+}
 
-        System.out.println("locations you can go to ");
-        exit(p,this);
+
     }
 
 
