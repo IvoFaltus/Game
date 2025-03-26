@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ForestTest {
     @Test
-    void testCreateMapPopulatesSurroundings() {
+    void testCreateMapPopulatesSurroundings(){
         Forest forest = new Forest();
         forest.createMap();
 
