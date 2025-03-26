@@ -60,7 +60,7 @@ p.setCurrentLocation(l.surroundingLocations.get(0));
 
                 break;
             case 1:
-                System.out.println("tohle");
+
                 System.out.println(p.getCurrentLocation().getLocationName());
                 p.setCurrentLocation(l.surroundingLocations.get(1));
                 break;
