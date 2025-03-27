@@ -9,8 +9,7 @@ public class World implements Command {
 
     }
 
-    public void startProgram() {
-    }
+
 
     @Override
     public void fight(Player p) {
@@ -22,11 +21,12 @@ public class World implements Command {
         return false;
     }
 
-    @Override
-    public void moveOnToOtherLoc() {
 
-    }
-
+    /**
+     * executes the whole game, sets all inventory slots as an empty slots and executes location's gameplay according to player's current location attribute
+     * @param p Player
+     * @return null
+     */
     @Override
     public String execute(Player p) {
         try {

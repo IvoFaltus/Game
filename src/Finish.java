@@ -4,6 +4,13 @@ public class Finish extends Location {
     public Finish() {
     }
 
+    /**
+     * informs player that he successfully finished the game and asks whether does he want to play again,
+     * in case he does want to replay, all locations are set as not-passed
+     * @param p Plauer
+     * @return null
+     */
+
     @Override
     public String execute(Player p) {
         String[] options = {"yes", "No"};
@@ -13,13 +20,23 @@ public class Finish extends Location {
                 JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
 
         if(choice==0){
+            Town t = new Town();
+            Forest f = new Forest();
+            FIeld ff = new FIeld();
+            River r  = new River();
+            t.var =false;
+            f.var = false;
+            ff.var = false;
+            r.var = false;
+
             Location l = new Location();
             l.setLocationName("Town");
+
             p.setCurrentLocation(l);
         }
         return null;
     }
-
+//region setget cons
     public Finish(Enum<State> state) {
         super(state);
     }
@@ -33,4 +50,5 @@ public class Finish extends Location {
     public boolean isEnd() {
         return end;
     }
+    //endregion
 }

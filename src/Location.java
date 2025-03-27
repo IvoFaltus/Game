@@ -3,11 +3,20 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Location implements Command {
-
+    /**
+     * is called when player finds item, gives choice whether to pick item up and store it inventory or let it be
+     * @param p Player
+     * @param number different items are linked to different numbers
+     * @return true: when certain slot of inventory possesses an item, otherwise the slot is empty: false
+     */
 public boolean ItemFound(Player p, int number){
 
 return false;
 }
+    /**
+     * executes fight between player and enemy, player is able to open inventory, equip item etc.
+     * @param p Player
+     */
     @Override
     public void fight(Player p) {
 
@@ -15,7 +24,11 @@ return false;
 
 
     }
-
+    /**
+     * randomly generates numbers
+     * @param probability chance[%] of returning true
+     * @return true or false according to randomly generated number
+     */
     @Override
     public boolean luck(int probability) {
         boolean temp = false;
@@ -27,12 +40,22 @@ return false;
 
          return temp;
     }
-
+    /**
+     * executes tasks and whole lore of the location when player is present
+     * @param p Player
+     * @return informs that location has been completed
+     */
     @Override
     public String execute(Player p) {
         return null;
     }
 
+    /**
+     * After completing location Player can decide whether to go on to another location or replay the previous one, subsequently
+     * location which player chooses is set as a player's current location
+     * @param p Player
+     * @param l Location
+     */
     @Override
     public void exit(Player p, Location l) {
 
@@ -74,10 +97,7 @@ p.setCurrentLocation(l.surroundingLocations.get(0));
 
     }
 
-    @Override
-    public void moveOnToOtherLoc() {
 
-    }
 
     protected String locationName;
     protected ArrayList<Item> items = new ArrayList<>();
@@ -86,6 +106,11 @@ protected Enum<State> state;
 protected String currentLocationName;
 protected String previousLocationName;
 protected String upcomingLocationName;
+
+    /**
+     *informs whether location in completed
+     * @return true: when location is completed, otherwise: false
+     */
     @Override
     public boolean locationPassed() {
         return false;
@@ -93,26 +118,16 @@ protected String upcomingLocationName;
 
 
 
-public void exitToPreviousLocation(Player player){
-    if(!(previousLocationName.equals("None"))) {
-        for (int i = 0; i < surroundingLocations.size(); i++) {
-            if (surroundingLocations.get(i).getState().equals(State.PREVIOUS)) {
-                player.setCurrentLocation(surroundingLocations.get(i));
-            }
-        }
-    }
-}
 
-public void fileReading(){
-
-}
 
 
 public enum State{
     PREVIOUS, UPCOMING, CURRENT
 }
 
-
+    /**
+     * reads input from text file and sets this location's name along with surrounding one's
+     */
     public void createMap(){
 
 

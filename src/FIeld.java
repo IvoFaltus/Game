@@ -4,6 +4,11 @@ import java.io.FileReader;
 
 public class FIeld extends Location {
     boolean var = false;
+
+    /**
+     * executes fight between player and enemy, player is able to open inventory, equip item etc.
+     * @param p Player
+     */
     @Override
     public void fight(Player p) {
 
@@ -48,6 +53,12 @@ public class FIeld extends Location {
 
     }
 
+    /**
+     * is called when player finds item, gives choice whether to pick item up and store it inventory or let it be
+     * @param p Player
+     * @param number different items are linked to different numbers
+     * @return true: when certain slot of inventory possesses an item, otherwise the slot is empty: false
+     */
     @Override
     public boolean ItemFound(Player p, int number) {
         String item = "";
@@ -100,21 +111,33 @@ public class FIeld extends Location {
         return temp;
     }
 
+    /**
+     * executes tasks and whole lore of the location when player is present
+     * @param p Player
+     * @return informs that location has been completed
+     */
     @Override
     public String execute(Player p) {
         createMap();
         roomGameplay(p);
 
 
-        return "";
+        return "location passed";
     }
 
-
+    /**
+     * better part of location's actions is being called here, some actions might or might not happen according to luck() method, eventually player is given choice where to continue
+     * @param p Player
+     */
     public void roomGameplay(Player p){
         String[] ok = {"Ok"};
-        int inform = JOptionPane.showOptionDialog(null, "You find yourself on a Filed, beat a even stronger monsters than previously an" +
-                "d get to move on to another location", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,ok,ok);
-        while(!locationPassed()){
+        if(locationPassed()){
+            int inform = JOptionPane.showOptionDialog(null, "You are on the field, again", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ok, ok);
+            var =false;
+        }else {
+            int inform = JOptionPane.showOptionDialog(null, "You find yourself on a Field, beat a even stronger monsters than previously an" +
+                    "d get to move on to another location", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ok, ok);
+        } while(!locationPassed()){
     fight(p);
     if(luck(50)){
         ItemFound(p,0);
@@ -140,27 +163,22 @@ public class FIeld extends Location {
         System.out.println("locations you can go to ");
         exit(p,this);
     }
-    @Override
-    public void exitToPreviousLocation(Player player) {
-        super.exitToPreviousLocation(player);
-    }
 
 
-
-
+    /**
+     *informs whether location in completed
+     * @return true: when location is completed, otherwise: false
+     */
     @Override
     public boolean locationPassed() {
         return var;
     }
 
-
+    /**
+     * reads input from text file and sets this location's name along with surrounding one's
+     */
     @Override
     public void createMap() {
-
-
-
-
-
 
 
         try {
@@ -169,10 +187,6 @@ public class FIeld extends Location {
             for(int i =0;i<3;i++) {
                 line = br.readLine();
             }
-
-
-
-
 
             this.currentLocationName = line.substring(0, line.indexOf(","));
             this.previousLocationName = line.substring(line.indexOf(",") + 1, line.indexOf(";"));

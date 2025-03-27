@@ -4,6 +4,10 @@ import java.io.FileReader;
 
 public class River extends Location {
     boolean var = false;
+    /**
+     * executes fight between player and enemy, player is able to open inventory, equip item etc.
+     * @param p Player
+     */
     @Override
     public void fight(Player p) {
 
@@ -47,7 +51,12 @@ public class River extends Location {
 
 
     }
-
+    /**
+     * is called when player finds item, gives choice whether to pick item up and store it inventory or let it be
+     * @param p Player
+     * @param number different items are linked to different numbers
+     * @return true: when certain slot of inventory possesses an item, otherwise the slot is empty: false
+     */
     @Override
     public boolean ItemFound(Player p, int number) {
         String item = "";
@@ -99,7 +108,11 @@ public class River extends Location {
 
         return temp;
     }
-
+    /**
+     * executes tasks and whole lore of the location when player is present
+     * @param p Player
+     * @return informs that location has been completed
+     */
     @Override
     public String execute(Player p) {
         createMap();
@@ -109,13 +122,20 @@ public class River extends Location {
         return "";
     }
 
-
+    /**
+     * better part of location's actions is being called here, some actions might or might not happen according to luck() method, eventually player is given choice where to continue
+     * @param p Player
+     */
     public void roomGameplay(Player p){
         String[] options = {"Build a boat","Swim through"};
         String[] ok = {"Ok"};
-        int inform = JOptionPane.showOptionDialog(null, "You find yourself in front of a river, In case you've collected enough of wood, you're able to build a boat. Otherwise you have to swim through" +
-                "d get to move on to another location", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,ok,ok);
-        String choice = (String) JOptionPane.showInputDialog(null, "choose your move", "equipped item- "+p.getEquipedItem().getKind(), JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if(locationPassed()){
+            int inform = JOptionPane.showOptionDialog(null, "You are by the river, again", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ok, ok);
+            var =false;
+        }else {
+            int inform = JOptionPane.showOptionDialog(null, "You find yourself in front of a river, In case you've collected enough of wood, you're able to build a boat. Otherwise you have to swim through" +
+                    "d get to move on to another location", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ok, ok);
+        }String choice = (String) JOptionPane.showInputDialog(null, "choose your move", "equipped item- "+p.getEquipedItem().getKind(), JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
             var = true;
 if(choice.equals("Build a boat")){
     exit(p,this);
@@ -135,25 +155,24 @@ if(choice.equals("Build a boat")){
 
 
 
-    @Override
-    public void exitToPreviousLocation(Player player) {
-        super.exitToPreviousLocation(player);
-    }
 
 
+    /**
+     *informs whether location in completed
+     * @return true: when location is completed, otherwise: false
+     */
     @Override
     public boolean locationPassed() {
-        return false;
-    }
-
-
-    public void info() {
-        System.out.println("Current Location: " + currentLocationName + '\n' + "Previous Location: " + previousLocationName + '\n' + "Upcoming Location: " + upcomingLocationName);
-        System.out.println();
+        return var;
     }
 
 
 
+
+
+    /**
+     * reads input from text file and sets this location's name along with surrounding one's
+     */
     @Override
     public void createMap() {
 
