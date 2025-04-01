@@ -13,6 +13,10 @@ public class Player {
 private int damage;
     Random rd = new Random();
 
+    /**
+     * allows player to open his inventory and equip chosen item
+     * @param p Player
+     */
     public void openInventory(Player p){
         String[] options3 = {p.getInventory().get(0).getKind(), p.getInventory().get(1).getKind(), p.getInventory().get(2).getKind(), p.getInventory().get(3).getKind(),
                 p.getInventory().get(4).getKind(), p.getInventory().get(5).getKind(), p.getInventory().get(6).getKind()};
@@ -45,12 +49,20 @@ private int damage;
 
     }
 
+    /**
+     * Adds Item to empty index(slot) in inventory
+     * @param i Item
+     * @param index index
+     */
     public void addToInventory(Item i, int index){
 
         inventory.add(index, i);
     }
 
-
+    /**
+     * Allows playerto equip Item from Inventory
+     * @param choice Player chooses item
+     */
     public void equipItem(String choice){
         for(int i =0;i<inventory.size();i++){
             if(choice.equals(inventory.get(i).getKind())){

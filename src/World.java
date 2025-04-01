@@ -1,4 +1,5 @@
 public class World implements Command {
+    //region obligatory overrides
     @Override
     public boolean locationPassed() {
         return false;
@@ -20,7 +21,7 @@ public class World implements Command {
     public boolean luck(int probability) {
         return false;
     }
-
+//endregion
 
     /**
      * executes the whole game, sets all inventory slots as an empty slots and executes location's gameplay according to player's current location attribute

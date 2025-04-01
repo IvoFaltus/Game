@@ -9,10 +9,7 @@ public class QuitGame implements Command{
 
     }
 
-    @Override
-    public void moveOnToOtherLoc() {
 
-    }
 
     @Override
     public boolean locationPassed() {
