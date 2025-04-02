@@ -16,9 +16,9 @@ public class Forest extends Location {
         String item = "";
         boolean temp = false;
         if(number==0) {
-             item = "wood log";
+             item = readItem(1);
         }else if(number==1){
-             item = "hammer";
+             item = readItem(2);;
         }
         int choice2 = 0;
         String[] options2 = { "Put it to inventory", "Leave it"};
@@ -198,8 +198,8 @@ return temp;
                 this.currentLocationName = line.substring(0, line.indexOf(","));
                 this.previousLocationName = line.substring(line.indexOf(",") + 1, line.indexOf(";"));
                 this.upcomingLocationName = line.substring(line.indexOf(";") + 1, line.length());
-                this.surroundingLocations.add(new Location("Town",State.PREVIOUS));
-                this.surroundingLocations.add(new Location("Field",State.UPCOMING));
+                this.surroundingLocations.add(new Location(this.previousLocationName,State.PREVIOUS));
+                this.surroundingLocations.add(new Location(this.upcomingLocationName,State.UPCOMING));
 
 
             } catch (Exception e) {

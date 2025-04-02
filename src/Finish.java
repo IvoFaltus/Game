@@ -14,25 +14,19 @@ public class Finish extends Location {
     @Override
     public String execute(Player p) {
         String[] options = {"yes", "No"};
-        System.out.println("You have successfully finished the game!");
-        System.out.println("do you wanna play again?");
-        int choice= JOptionPane.showOptionDialog(null,"Do you wanna play again?","Replay",JOptionPane.DEFAULT_OPTION,
+
+        int choice= JOptionPane.showOptionDialog(null,"You have successfully finished the game! Do you wanna play again?","Replay",JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
 
         if(choice==0){
-            Town t = new Town();
-            Forest f = new Forest();
-            FIeld ff = new FIeld();
-            River r  = new River();
-            t.var =false;
-            f.var = false;
-            ff.var = false;
-            r.var = false;
+
 
             Location l = new Location();
             l.setLocationName("Town");
 
             p.setCurrentLocation(l);
+        }else {
+            System.exit(32);
         }
         return null;
     }

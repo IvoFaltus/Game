@@ -1,8 +1,27 @@
 import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Location implements Command {
+
+    public String readItem(int line){
+        String item ="";
+        try{
+
+
+            BufferedReader br = new BufferedReader(new FileReader("Items.txt"));
+
+            for(int i=0;i<line;i++){
+                item = br.readLine();
+            }
+        }catch (Exception e){
+            System.out.println("problem linked with reading");
+        }
+        return item;
+    }
+
     /**
      * is called when player finds item, gives choice whether to pick item up and store it inventory or let it be
      * @param p Player
@@ -65,7 +84,7 @@ return false;
         int choice =0;
         choice = JOptionPane.showOptionDialog(null,"What location do you want to proceed to","equipped item: "+p.getEquipedItem().getKind(),JOptionPane.DEFAULT_OPTION,
                JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
-        System.out.println("choice is "+choice);
+
         switch (choice){
             case 0:
                 if(!(surroundingLocations.get(0).getLocationName().equals("There is no previous location"))){

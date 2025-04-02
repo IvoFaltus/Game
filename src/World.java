@@ -34,7 +34,7 @@ public class World implements Command {
             p.setCurrentLocation(new Location("Town", Location.State.CURRENT));
             Finish fi = new Finish();
 
-            System.out.println("player stars here" + p.getCurrentLocation().getLocationName());
+
             Town t = new Town();
             FIeld f = new FIeld();
             River r = new River();

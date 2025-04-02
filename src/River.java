@@ -3,6 +3,22 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class River extends Location {
+
+    public boolean hasEnoughWood(Player p){
+        int temp = 0;
+        boolean temp2 = false;
+        for(int i=0;i<p.getInventory().size();i++){
+            if(p.getInventory().get(i).getKind().equals("wood log")){
+                temp++;
+            }
+
+        }
+        if (temp>=3){
+            temp2 = true;
+        }
+        return temp2;
+    }
+
     boolean var = false;
     /**
      * executes fight between player and enemy, player is able to open inventory, equip item etc.
@@ -62,9 +78,9 @@ public class River extends Location {
         String item = "";
         boolean temp = false;
         if(number==0) {
-            item = "wood log";
+            item = readItem(1);
         }else if(number==1){
-            item = "pistol";
+            item = readItem(3);
         }
         int choice2 = 0;
         String[] options2 = { "Put it to inventory", "Leave it"};
@@ -133,19 +149,27 @@ public class River extends Location {
             int inform = JOptionPane.showOptionDialog(null, "You are by the river, again", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ok, ok);
             var =false;
         }else {
-            int inform = JOptionPane.showOptionDialog(null, "You find yourself in front of a river, In case you've collected enough of wood, you're able to build a boat. Otherwise you have to swim through" +
-                    "d get to move on to another location", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ok, ok);
+            int inform = JOptionPane.showOptionDialog(null, "You find yourself in front of a river, In case you've collected enough of wood, you're able to build a boat. Otherwise you have to swim through " +
+                    "to get to move on to finish", "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ok, ok);
         }String choice = (String) JOptionPane.showInputDialog(null, "choose your move", "equipped item- "+p.getEquipedItem().getKind(), JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
             var = true;
-if(choice.equals("Build a boat")){
-    exit(p,this);
-}else if(choice.equals("Swim through")){
+
+
+if(choice.equals("Build a boat")&&hasEnoughWood(p)){
+
+
+} else if (choice.equals("Build a boat")&&(!hasEnoughWood(p))) {
+    int inform = JOptionPane.showOptionDialog(null, "You have not collected enough wood throughout the journey, you have to fight and swim through after all"
+        , "Lore of the location", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ok, ok);
+} else if(choice.equals("Swim through")){
     fight(p);
+    }
+
     exit(p,this);
 }
 
 
-    }
+
 
 
 
@@ -195,8 +219,8 @@ if(choice.equals("Build a boat")){
             this.currentLocationName = line.substring(0, line.indexOf(","));
             this.previousLocationName = line.substring(line.indexOf(",") + 1, line.indexOf(";"));
             this.upcomingLocationName = line.substring(line.indexOf(";") + 1, line.length());
-            this.surroundingLocations.add(new Location("Field",State.PREVIOUS));
-            this.surroundingLocations.add(new Location("Finish", State.UPCOMING));
+            this.surroundingLocations.add(new Location( this.previousLocationName,State.PREVIOUS));
+            this.surroundingLocations.add(new Location(this.upcomingLocationName, State.UPCOMING));
 
 
         } catch (Exception e) {

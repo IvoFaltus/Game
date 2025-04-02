@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 
 public class Town extends Location {
+    public void reset(){
+        var = false;
+    }
     boolean var = false;
     int number;
     String[] options = {"Attack"};
@@ -30,7 +33,7 @@ public class Town extends Location {
     @Override
     public boolean ItemFound(Player p, int number) {
         boolean temp = false;
-        String item = "wood log";
+        String item = readItem(1);
         int choice2 = 0;
         String[] options2 = { "Put it to inventory", "Leave it"};
         System.out.println();
@@ -168,7 +171,7 @@ return temp;
            this.previousLocationName = line.substring(line.indexOf(",") + 1, line.indexOf(";"));
             this.upcomingLocationName = line.substring(line.indexOf(";") + 1, line.length());
             this.surroundingLocations.add(new Location("There is no previous location",State.PREVIOUS));
-            this.surroundingLocations.add(new Location("Forest", State.UPCOMING));
+            this.surroundingLocations.add(new Location(this.upcomingLocationName, State.UPCOMING));
 
 
         } catch (Exception e) {

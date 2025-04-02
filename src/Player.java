@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -80,24 +83,56 @@ private int damage;
     }
 
     public void setDamage() {
-        switch (equipedItem.getKind()){
-            case "none":
-                this.damage = rd.nextInt(10,20);
-                break;
-            case "wood log":
-                this.damage = rd.nextInt(20,30);
-                break;
-            case"hammer":
-                this.damage = rd.nextInt(20,40);
-                break;
-            case "pistol":
-                this.damage = rd.nextInt(40,50);
-            case "rifle":
-                this.damage = rd.nextInt(50,70);
-            default:
-                this.damage = rd.nextInt(10,20);
-                break;
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("Weapons.txt"));
+int from =0;
+int to =0;
+int linesToRead =0;
+            switch (equipedItem.getKind()){
+
+
+                case "none":
+                    linesToRead = 1;
+                    break;
+                case "wood log":
+                    linesToRead = 2;
+                    break;
+                case "hammer":
+                    linesToRead = 3;
+                    break;
+                case "pistol":
+                    linesToRead = 4;
+                    break;
+                case "rifle":
+                    linesToRead = 5;
+                    break;
+                default:
+                    linesToRead = 1;
+                    break;
+            }
+
+
+            for (int i = 0; i < linesToRead; i++) {
+                String line = br.readLine();
+                String[] parts = line.split(",");
+                from = Integer.parseInt(parts[0].trim());
+                to = Integer.parseInt(parts[1].trim());
+            }
+
+
+            this.damage = rd.nextInt(from, to);
+
+        } catch (Exception e) {
+
+            System.out.println("problem with setting damage");
+            throw new RuntimeException(e);
         }
+
+
+
+
+
     }
 
     public Item getEquipedItem() {

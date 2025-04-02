@@ -1,0 +1,4 @@
+wood log
+hammer
+pistol
+rifle
